@@ -3,16 +3,13 @@ import { getUserTodoListAction } from "@/actions/todo.actions";
 import AddTodoForm from "@/components/AddTodoForm";
 import TodosTable from "@/components/TodoTable";
 import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
   const { userId } = auth();
 
   if (!userId) {
-    // Redirect to login page if userId is not available
-    // In Next.js, you should handle redirection using middleware, 
-    // so this section is more about providing fallback UI.
-    // You can return a loading state or a message here if you prefer
-    return <p>Loading...</p>;
+    return  redirect("/sign-in");;
   }
 
   // Fetch the todo list
