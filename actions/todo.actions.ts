@@ -11,18 +11,20 @@ export const getUserTodoListAction = async ({
 }: {
   userId: string | null;
 }) => {
-  // error handling
-  
+  if (!userId) {
+    throw new Error("User ID is required.");
+  }
+
   return await prisma.todo.findMany({
     where: {
-      user_id: userId as string,
+      user_id: userId,
     },
     orderBy: {
       createdAt: "desc",
     },
   });
-  
 };
+
 export const createTodoAction = async ({
   title,
   body,
@@ -30,21 +32,26 @@ export const createTodoAction = async ({
   userId,
 }: {
   title: string;
-  body?: string | undefined;
+  body?: string;
   completed: boolean;
   userId: string | null;
 }) => {
+  if (!userId) {
+    throw new Error("User ID is required.");
+  }
+
   await prisma.todo.create({
     data: {
       title,
       body,
       completed,
-      user_id: userId as string,
+      user_id: userId,
     },
   });
 
   revalidatePath("/");
 };
+
 export const deleteTodoAction = async ({ id }: { id: string }) => {
   await prisma.todo.delete({
     where: {

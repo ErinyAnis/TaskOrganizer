@@ -1,18 +1,9 @@
-'use client'
+import { SignUp } from "@clerk/nextjs";
 
-import { SignUp, useAuth } from '@clerk/nextjs'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-
-export default function SignUpPage() {
-  const { isSignedIn } = useAuth()
-  const router = useRouter()
-
-  useEffect(() => {
-    if (isSignedIn) {
-      router.push('/')
-    }
-  }, [isSignedIn, router])
-
-  return <SignUp />
+export default function Page() {
+  return (
+    <div className="inset-0 flex items-center justify-center min-h-[calc(100vh-80px)]">
+      <SignUp />
+    </div>
+  );
 }

@@ -2,44 +2,38 @@
 
 import { Button } from "@/components/ui/button";
 
-export default function GlobalError({
-  // error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
+export default function GlobalError({ reset }: { error: Error & { digest?: string }; reset: () => void }) {
   return (
-    // global-error must include html and body tags
     <html>
       <body>
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="max-w-md mx-auto p-6 bg-red-100 border border-red-300 rounded-lg shadow-md">
-            <div className="flex items-center space-x-4">
-              <svg
-                className="w-12 h-12 text-red-600"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M12 1.5a10.5 10.5 0 1 0 0 21 10.5 10.5 0 0 0 0-21zm-1.5 14a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0zm1.5-7a1.5 1.5 0 0 0-1.5 1.5v4a1.5 1.5 0 0 0 3 0v-4a1.5 1.5 0 0 0-1.5-1.5z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <div>
-                <h1 className="text-2xl font-bold text-red-600">
-                  Something went wrong
-                </h1>
-                <p className="mt-4 text-red-800">
-                  Oops something went wrong. try to refresh this page or <br />
-                  feel free to contact us if the problem presists
-                </p>
-                <Button onClick={() => reset()} className="mt-5">Try again</Button>
+        <div className="fixed inset-0 flex items-center justify-center p-5 w-full">
+          <div className="text-center">
+            <div className="inline-flex rounded-full bg-red-100 p-4">
+              <div className="rounded-full stroke-red-600 bg-red-200 p-4">
+                <svg className="w-16 h-16" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M6 8H6.01M6 16H6.01M6 12H18C20.2091 12 22 10.2091 22 8C22 5.79086 20.2091 4 18 4H6C3.79086 4 2 5.79086 2 8C2 10.2091 3.79086 12 6 12ZM6 12C3.79086 12 2 13.7909 2 16C2 18.2091 3.79086 20 6 20H14"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  ></path>
+                  <path
+                    d="M17 16L22 21M22 16L17 21"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  ></path>
+                </svg>
               </div>
             </div>
+            <h2 className="mt-5 text-[36px] font-bold lg:text-[50px]">Something Went Wrong</h2>
+            <p className="mt-5 lg:text-lg">
+              Oops something went wrong. Try to refresh this page or <br /> feel free to contact us if the problem
+              presists.
+            </p>
+            <Button onClick={() => reset()} className="my-10">
+              Try again
+            </Button>
           </div>
         </div>
       </body>
